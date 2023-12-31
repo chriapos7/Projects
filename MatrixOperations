@@ -341,7 +341,7 @@ void CalculateDeterminant(int Columns) {
 				fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t %.7g \n", DetA);
 			}
 }
-	else {
+else {
 		printf("\n \t\tEnter Elements in the Array : \n");
 			for (int i = 0; i < Columns; i++) {
   				for (int j = 0; j < Columns; j++) {
