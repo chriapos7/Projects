@@ -288,6 +288,31 @@ void CalculateDeterminant(int Columns) {
 				printf("%lf", A[0][0]);	
 			}
 	}
+	void CalculateDeterminant(int Columns) {
+	
+	double A[Columns][Columns], DetA;
+
+	FILE *MatrixOperations;
+		MatrixOperations = fopen("MatrixOperations.txt", "a");
+		if ( MatrixOperations == NULL) {
+			printf("Error Opening the File.\n");
+			exit(EXIT_FAILURE);
+		}
+			fprintf(MatrixOperations, "\t\tArray : \n\n");
+	
+	if ( Columns == 1) {
+		printf("\n \t\tEnter an element in the Array : \n");
+		printf("\tA11: ");
+		scanf("%lf", &A[0][0]);
+		printf("\n\t\tThe determinant of the Array : \n");
+			if ( fmod(A[0][0], 1.0) == 0.0) {
+				int Integer_Value = (int)A[0][0];
+				printf("\t%d", Integer_Value);
+			}
+			else {
+				printf("%lf", A[0][0]);	
+			}
+	}
 	else if ( Columns == 2) {
 		printf("\n \t\tEnter Elements in the Array : \n");
 			for (int i = 0; i < Columns; i++) {
@@ -308,9 +333,8 @@ void CalculateDeterminant(int Columns) {
 		DetA = 	A[0][0] * A[1][1] - A[0][1] * A[1][0];
 
 		if ( fmod(DetA, 1.0) == 0.0 ) {
-				int Integer_Value = (int)DetA;
-				printf("\t\tThe determinant of the array : \n\t%d", Integer_Value);
-				fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t %.7g \n", Integer_Value);
+				printf("\t\tThe determinant of the array : \n\t%d", DetA);
+				fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t %.7g \n", DetA);
 			}
 		else {
 				printf("\t\tThe determinant of the array : \n\t%.7g", DetA);
