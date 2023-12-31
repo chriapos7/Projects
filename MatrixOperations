@@ -439,7 +439,7 @@ SelectExercises() {
 					printf("Invalid array dimension. Please try again.\n");
 			}
 		}
-	}*/
+	}
 }
 int main() {
     SelectExercises();
