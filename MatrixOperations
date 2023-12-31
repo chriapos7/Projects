@@ -248,7 +248,7 @@ MultiplyingOf2Matrixes(int Rows, int Columns, int Columns2, int Integer_Result) 
 								
 		fclose(MatrixOperations);
 							
-    		printf("\n\tPress 1 -> Multiply another arrays with the same dimensions.\n");
+    		printf("\n\tPress 1 -> Multiply another array with the same dimensions.\n");
 			printf("\tPress 2 -> Another exercise.\n");
 			printf("\tPress any other button to exit.\n");
 			scanf("%d", &back);
