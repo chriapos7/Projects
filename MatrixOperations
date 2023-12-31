@@ -263,6 +263,114 @@ MultiplyingOf2Matrixes(int Rows, int Columns, int Columns2, int Integer_Result) 
     		printf("\n");
 }
 
+void CalculateDeterminant(int Columns) {
+	
+	double A[Columns][Columns], DetA;
+
+	FILE *MatrixOperations;
+		MatrixOperations = fopen("MatrixOperations.txt", "a");
+		if ( MatrixOperations == NULL) {
+			printf("Error Opening the File.\n");
+			exit(EXIT_FAILURE);
+		}
+			fprintf(MatrixOperations, "\t\tArray : \n\n");
+	
+	if ( Columns == 1) {
+		printf("\n \t\tEnter an element in the Array : \n");
+		printf("\tA11: ");
+		scanf("%lf", &A[0][0]);
+		printf("\n\t\tThe determinant of the Array : \n");
+			if ( fmod(A[0][0], 1.0) == 0.0) {
+				int Integer_Value = (int)A[0][0];
+				printf("\t%d", Integer_Value);
+			}
+			else {
+				printf("%lf", A[0][0]);	
+			}
+	}
+	else if ( Columns == 2) {
+		printf("\n \t\tEnter Elements in the Array : \n");
+			for (int i = 0; i < Columns; i++) {
+  				for (int j = 0; j < Columns; j++) {
+  					printf("\tA%d%d: ", i + 1, j + 1);
+  					scanf("%lf", &A[i][j]);
+  						if (fmod(A[i][j], 1.0) == 0.0) {
+                			int Integer_Value = (int)A[i][j];
+                			fprintf(MatrixOperations, "\t%d", Integer_Value);
+            			} 
+						else {
+                			fprintf(MatrixOperations, "\t%.7g", A[i][j]); 
+            		}
+			  	}
+			  	fprintf(MatrixOperations, "\n\n");
+			  	printf("\n"); 
+		}
+		DetA = 	A[0][0] * A[1][1] - A[0][1] * A[1][0];
+
+		if ( fmod(DetA, 1.0) == 0.0 ) {
+				int Integer_Value = (int)DetA;
+				printf("\t\tThe determinant of the array : \n\t%d", Integer_Value);
+				fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t %.7g \n", Integer_Value);
+			}
+		else {
+				printf("\t\tThe determinant of the array : \n\t%.7g", DetA);
+				fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t %.7g \n", DetA);
+			}
+}
+	else {
+		printf("\n \t\tEnter Elements in the Array : \n");
+			for (int i = 0; i < Columns; i++) {
+  				for (int j = 0; j < Columns; j++) {
+  					printf("\tA%d%d: ", i + 1, j + 1);
+  					scanf("%lf", &A[i][j]);
+  						if (fmod(A[i][j], 1.0) == 0.0) {
+                			int Integer_Value = (int)A[i][j];
+                			fprintf(MatrixOperations, "\t%d", Integer_Value);
+            			} 
+						else {
+                		fprintf(MatrixOperations, "\t%.7g", A[i][j]); 
+			  	} 	
+			}
+				fprintf(MatrixOperations, "\n\n");
+			  	printf("\n"); 
+		}
+		
+		DetA = A[0][0] * ( A[1][1] * A[2][2] - ( A[1][2] * A[2][1] ) ) -
+		  	   A[0][1] * ( A[1][0] * A[2][2] - ( A[2][0] * A[1][2] ) ) + 
+			   A[0][2] * ( A[1][0] * A[2][1] - ( A[2][0] * A[1][1] ) );
+			
+			  if ( fmod(DetA, 1.0) == 0) {
+			  		int Integer_Value = DetA;
+			  		printf("\n \t\tThe determinant of the array : \n \t%d", Integer_Value);
+			  		fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t%d", Integer_Value);
+			  } 
+			  else {
+			  	printf("\n \t\tThe determinant of the array : \n\t%.7g\n", DetA);
+			  	fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t%.7g", DetA);
+			  }
+  	}
+  	time_t t = time(NULL);
+    struct tm *tm_info = localtime(&t);
+    fprintf(MatrixOperations, "\n\nThe Determinant calculated at: %d-%02d-%02d %02d:%02d:%02d\n\n",
+            tm_info->tm_year + 1900, tm_info->tm_mon + 1, tm_info->tm_mday,
+            tm_info->tm_hour, tm_info->tm_min, tm_info->tm_sec);
+            
+    fclose(MatrixOperations);
+    
+  	printf("\n\n\tPress 1 -> Find the determinant of another array.\n");
+			printf("\tPress 2 -> Another exercise.\n");
+			printf("\tPress any other button to exit.\n");
+			scanf("%d", &back);
+		
+		 	if (back == 1) {
+		 		CalculateDeterminant(Columns);
+		 	} else if (back == 2) {
+		 		SelectExercises();
+		 	} else {
+		 		exit(0);
+	}
+}
+
 SelectExercises() {
     int selection, Rows, Columns, Columns2;
 
