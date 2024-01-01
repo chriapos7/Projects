@@ -374,8 +374,7 @@ int selection, Rows, Columns, Columns2;
     printf("\t1 -> Add 2 arrays.\n");
     printf("\t2 -> Substract 2 arrays.\n");
     printf("\t3 -> Multiply 2 arrays.\n");
-	printf("\t4 -> Calculate the inverse of an array.\n");
-	printf("\t5 -> Calculate the determinant of an array.\n");
+	printf("\t4 -> Calculate the determinant of an array.\n");
     scanf("%d", &selection);
 
     if (selection == 1) {
@@ -416,16 +415,7 @@ int selection, Rows, Columns, Columns2;
             		printf("Invalid matrix dimensions. Please try again.\n");
         }
     }
-    else if (selection == 4) { // Logic for finding the inverse of an array 
-		printf("Enter the number of Rows/Columns for the Array, max(3): ");
-        scanf("%d", &Rows); 
-        	if ( ( Rows > 0 ) && ( Rows <= 3) ) {
-        	//	CalculateInverseArray(Rows);
-			} else {
-            		printf("Invalid array dimension. Please try again.\n");
-        }
-	}
-	else if (selection == 5) { // Logic for finding the determinant of an array
+	else if (selection == 4) { // Logic for finding the determinant of an array
 		printf("Enter the number of Rows/Columns for the Array, max(3): ");
 		scanf("%d", &Columns);
 			if ( ( Columns > 0 ) && ( Columns <= 3) ) {
@@ -435,6 +425,10 @@ int selection, Rows, Columns, Columns2;
 					printf("Invalid array dimension. Please try again.\n");
 			}
 		}
+		else  {
+				printf("Invalid number. Please type an integer number : 1 - 5.\n\n");
+				SelectExercises();
+			}
 	}
 
 int main() {
