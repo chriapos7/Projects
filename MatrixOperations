@@ -52,7 +52,7 @@ void AddMatrices(int Rows, int Columns) {
     fprintf(MatrixOperations, "\n");
 
     fprintf(MatrixOperations, "\t\t\tThe Addition of the arrays : \n\n");
-    printf("\n \t\tThe Addition of the arrays : \n");
+    printf("\n \t\tThe Addition : \n");
     for (int i = 0; i < Rows; i++) {
         for (int j = 0; j < Columns; j++) {
             C[i][j] = A[i][j] + B[i][j];
@@ -159,21 +159,16 @@ void SubtractMatrices(int Rows, int Columns) {
         exit(0);
     }
 }
-MultiplyingOf2Matrixes(int Rows, int Columns, int Columns2, int Integer_Result) {
+
+void MultiplyingOf2Matrixes(int Rows, int Columns, int Columns2, int Integer_Result) {
 	
 	double A[Rows][Columns], B[Columns][Columns2], C[SIZE][SIZE];
 	
-	static bool hasBeenCalled = false; 
-  	static int calculatedResistance;
-
-  	if (hasBeenCalled) {
-    	return calculatedResistance; 
-  	}
   	FILE *MatrixOperations;
   		MatrixOperations = fopen("MatrixOperations.txt", "a");
   			if ( MatrixOperations == NULL) {
   				printf("Error Opening the File.\n");
-  				exit(0);
+  				exit(EXIT_FAILURE);
 			  }
 				printf("\n \t\tEnter Elements in the 1st Array : \n");
 				fprintf(MatrixOperations, "\t\t\t1st Array : \n\n");
@@ -240,7 +235,7 @@ MultiplyingOf2Matrixes(int Rows, int Columns, int Columns2, int Integer_Result) 
     		printf("\n");
     	}
     	
-		time_t t = time(NULL);
+			time_t t = time(NULL);
     		struct tm *tm_info = localtime(&t);
     		fprintf(MatrixOperations, "\nMultiplication calculated at: %d-%02d-%02d %02d:%02d:%02d\n\n",
             	tm_info->tm_year + 1900, tm_info->tm_mon + 1, tm_info->tm_mday,
@@ -287,32 +282,7 @@ void CalculateDeterminant(int Columns) {
 			else {
 				printf("%lf", A[0][0]);	
 			}
-	}
-	void CalculateDeterminant(int Columns) {
-	
-	double A[Columns][Columns], DetA;
-
-	FILE *MatrixOperations;
-		MatrixOperations = fopen("MatrixOperations.txt", "a");
-		if ( MatrixOperations == NULL) {
-			printf("Error Opening the File.\n");
-			exit(EXIT_FAILURE);
 		}
-			fprintf(MatrixOperations, "\t\tArray : \n\n");
-	
-	if ( Columns == 1) {
-		printf("\n \t\tEnter an element in the Array : \n");
-		printf("\tA11: ");
-		scanf("%lf", &A[0][0]);
-		printf("\n\t\tThe determinant of the Array : \n");
-			if ( fmod(A[0][0], 1.0) == 0.0) {
-				int Integer_Value = (int)A[0][0];
-				printf("\t%d", Integer_Value);
-			}
-			else {
-				printf("%lf", A[0][0]);	
-			}
-	}
 	else if ( Columns == 2) {
 		printf("\n \t\tEnter Elements in the Array : \n");
 			for (int i = 0; i < Columns; i++) {
@@ -333,8 +303,9 @@ void CalculateDeterminant(int Columns) {
 		DetA = 	A[0][0] * A[1][1] - A[0][1] * A[1][0];
 
 		if ( fmod(DetA, 1.0) == 0.0 ) {
-				printf("\t\tThe determinant of the array : \n\t%d", DetA);
-				fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t %.7g \n", DetA);
+				int Integer_Value = (int)DetA;
+				printf("\t\tThe determinant of the array : \n\t%d", Integer_Value);
+				fprintf(MatrixOperations, "\t\tDeterminant : \n\n \t %.7g \n", Integer_Value);
 			}
 		else {
 				printf("\t\tThe determinant of the array : \n\t%.7g", DetA);
@@ -396,7 +367,8 @@ else {
 }
 
 SelectExercises() {
-    int selection, Rows, Columns, Columns2;
+
+int selection, Rows, Columns, Columns2;
 
     printf("Select one of the following options: \n");
     printf("\t1 -> Add 2 arrays.\n");
@@ -438,17 +410,17 @@ SelectExercises() {
         printf("Enter the number of Columns for the 2nd Matrix, max(3): ");
         scanf("%d", &Columns2);
         	if (Rows > 0 && Rows <= 3 && Columns > 0 && Columns <= 3 && Columns2 > 0 && Columns2 <= 3) {
-        			MultiplyingOf2Matrixes(Rows, Columns, Columns2, Integer_Result);
+        		MultiplyingOf2Matrixes(Rows, Columns, Columns2, Integer_Result);
 			}
 			else {
             		printf("Invalid matrix dimensions. Please try again.\n");
         }
-    }/*
+    }
     else if (selection == 4) { // Logic for finding the inverse of an array 
 		printf("Enter the number of Rows/Columns for the Array, max(3): ");
         scanf("%d", &Rows); 
         	if ( ( Rows > 0 ) && ( Rows <= 3) ) {
-        		CalculateInverseArray();
+        	//	CalculateInverseArray(Rows);
 			} else {
             		printf("Invalid array dimension. Please try again.\n");
         }
@@ -464,7 +436,7 @@ SelectExercises() {
 			}
 		}
 	}
-}
+
 int main() {
     SelectExercises();
     return 0;
